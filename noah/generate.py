@@ -14,11 +14,22 @@ with open('../raws/2of12id.txt') as wordlist:
         # Filter out empty strings
         split = filter(None, split)
 
+        word = split.pop(0)
+
+        # Get part of speech
+        pos = split.pop(0).replace(':', '')
+
+        if (pos == 'N' and len(split) > 0):
+            plurals = split.pop(0)
+
         dictionary.append({
-            'word': split[0],
-            'part_of_speech': split[1].replace(':', ''),
-            'dump': split[2:len(split)]
+            'word': word,
+            'plurals': plurals,
+            'part_of_speech': pos,
+            'dump': split[0:len(split)]
         })
+
+        plurals = ''
 
 with open('../dictionaries/english.json', 'w') as output:
     json.dump(dictionary, output, indent=4, separators=(',', ': '))
