@@ -19,30 +19,37 @@ with open('../raws/2of12id.txt') as wordlist:
         # Get part of speech
         pos = split.pop(0).replace(':', '')
 
+        # If the word is a noun
         if pos == 'N':
             plurals = ''
 
+            # Check for plurals
             if len(split) > 0:
                 plurals = split.pop(0)
 
+            # Add word to dictionary
             dictionary.append({
                 'word': word,
                 'plurals': plurals,
                 'part_of_speech': pos,
                 'dump': split[0:len(split)]
             })
+        # If the word is a verb
         elif pos == 'V':
             verbs = []
+
+            # Check for verb forms
             if len(split) > 2:
                 for v in split[:]:
                     i = split.index(v)
                     if not '(' in split[i]:
                         verbs.append(split.pop(i))
 
+                # Add word to dictionary
                 dictionary.append({
                     'word': word,
                     'verb_forms': {
-                        'past': verbs[0] ,
+                        'past': verbs[0],
                         'present': verbs[1],
                         'plural': verbs[2]
                     },
@@ -50,12 +57,43 @@ with open('../raws/2of12id.txt') as wordlist:
                     'dump': split[0:len(split)]
                 })
             else:
+                # Add word to dictionary
                 dictionary.append({
                     'word': word,
                     'verb_forms': {
                         'past': '' ,
                         'present': '',
                         'plural': ''
+                    },
+                    'part_of_speech': pos,
+                    'dump': split[0:len(split)]
+                })
+        elif pos == 'A':
+            forms = []
+
+            if len(split) > 1:
+                for a in split[:]:
+                    i = split.index(a)
+                    print split[i]
+                    forms.append(split.pop(i))
+
+                # Add word to dictionary
+                dictionary.append({
+                    'word': word,
+                    'forms': {
+                        'comparative': forms[0],
+                        'superlative': forms[1]
+                    },
+                    'part_of_speech': pos,
+                    'dump': split[0:len(split)]
+                })
+            else:
+                # Add word to dictionary
+                dictionary.append({
+                    'word': word,
+                    'forms': {
+                        'comparative': '',
+                        'superlative': ''
                     },
                     'part_of_speech': pos,
                     'dump': split[0:len(split)]
