@@ -9,6 +9,9 @@ class Noah(object):
     def list(self):
         return [entry['word'] for entry in self.dictionary]
 
+    def list_filter(self, query):
+        return filter(lambda x: x['word'].startswith(query), self.dictionary)
+
     def define(self, word):
         return filter(lambda x: x['word'] == word, self.dictionary)
 

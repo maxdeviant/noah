@@ -18,6 +18,10 @@ def index():
 def list():
 	return jsonify({ 'response': n.list() })
 
+@api.route(api_base + '/list/<string:query>', methods=['GET'])
+def list_filter(query):
+	return jsonify({ 'response': n.list_filter(query) })
+
 @api.route(api_base + '/define/<string:word>', methods=['GET'])
 def define(word):
 	return jsonify({ 'response': n.define(word) })
