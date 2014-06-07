@@ -1,4 +1,4 @@
-import re
+import os
 import json
 
 dictionary = []
@@ -104,5 +104,9 @@ with open('../raws/2of12id.txt') as wordlist:
                 'dump': split[0:len(split)]
             })
 
-with open('../dictionaries/english.json', 'w') as output:
+output_dir = '../dictionaries/'
+if not os.path.exists(output_dir):
+    os.makedirs(output_dir)
+
+with open(os.path.join(output_dir, 'english.json'), 'w') as output:
     json.dump(dictionary, output, indent=4, separators=(',', ': '))
