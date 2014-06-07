@@ -1,4 +1,5 @@
 import json
+import random
 
 class Noah(object):
     def __init__(self, dictionary_file):
@@ -13,12 +14,16 @@ class Noah(object):
         if not entry is None:
             return '%s (%s)' % (entry['word'], entry['part_of_speech'])
 
+    def random(self):
+        return(random.choice(self.dictionary))
+
 def main():
     with open('../dictionaries/english.json') as dictionary:
         n = Noah(dictionary)
 
     print n.list()
     print n.define('aardvark')
+    print n.random()
 
 if __name__ == '__main__':
     main()
