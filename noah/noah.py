@@ -14,6 +14,3 @@ class Noah(object):
 
     def random(self):
         return random.choice(self.dictionary)
-
-with open('../dictionaries/english.json') as dictionary:
-    n = Noah(dictionary)

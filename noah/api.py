@@ -1,26 +1,30 @@
 from flask import Flask, jsonify
 from noah import Noah
 
-app = Flask(__name__)
+api = Flask(__name__)
 
 with open('../dictionaries/english.json') as dictionary:
     n = Noah(dictionary)
 
-@app.route('/')
+base_url = '/noah/api/'
+version = 'v0.1'
+api_base = base_url + version
+
+@api.route(api_base)
 def index():
     return 'Noah'
 
-@app.route('/noah/api/v0.1/list', methods=['GET'])
+@api.route(api_base + '/list', methods=['GET'])
 def list():
 	return jsonify({ 'response': n.list() })
 
-@app.route('/noah/api/v0.1/define/<string:word>', methods=['GET'])
+@api.route(api_base + '/define/<string:word>', methods=['GET'])
 def define(word):
 	return jsonify({ 'response': n.define(word) })
 
-@app.route('/noah/api/v0.1/random', methods=['GET'])
+@api.route(api_base + '/random', methods=['GET'])
 def random():
     return jsonify({ 'response': n.random() })
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    api.run(debug=True)
