@@ -12,9 +12,6 @@ class Noah(object):
     def define(self, word):
         return self.output(filter(lambda x: x['word'] == word, self.dictionary))
 
-        if not entry is None:
-            return self.output(entry)
-
     def random(self):
         return self.output(random.choice(self.dictionary))
 
