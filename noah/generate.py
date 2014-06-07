@@ -74,7 +74,6 @@ with open('../raws/2of12id.txt') as wordlist:
             if len(split) > 1:
                 for a in split[:]:
                     i = split.index(a)
-                    print split[i]
                     forms.append(split.pop(i))
 
                 # Add word to dictionary
